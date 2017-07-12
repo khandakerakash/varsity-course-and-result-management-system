@@ -33,3 +33,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::post('/department/delete', 'Admin\DepartmentController@delete')->name('admin.department.delete');
 
 });
+
+//For admin teachers activities
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+
+    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
+    Route::get('/teachers', 'Admin\TeacherController@teachers')->name('admin.teachers.all');
+    Route::get('/add_teacher', 'Admin\TeacherController@teacherAddForm')->name('admin.teacher.teacherAddForm');
+    Route::post('/teacher/add', 'Admin\TeacherController@add')->name('admin.teacher.add');
+    Route::get('/teacher/view', 'Admin\TeacherController@view')->name('admin.teacher.view');
+    Route::post('/teacher/update', 'Admin\TeacherController@update')->name('admin.teacher.update');
+    Route::post('/teacher/delete', 'Admin\TeacherController@delete')->name('admin.teacher.delete');
+
+});

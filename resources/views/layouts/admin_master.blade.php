@@ -83,15 +83,15 @@
                         <a href="{{route('admin.departments.all')}}"><i class="fa fa-building fa-fw"></i> Departments <span class="pull-right fa fa-angle-right"></span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-graduation-cap fa-fw"></i> Faculty Members<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Show All Teachers</a>
-                            </li>
-                            <li>
-                                <a href="#">Add New Teacher</a>
-                            </li>
-                        </ul>
+                        <a href="{{route('admin.teachers.all')}}"><i class="fa fa-graduation-cap fa-fw"></i> Faculty Members<span class="pull-right fa fa-angle-right"></span></a>
+                        {{--<ul class="nav nav-second-level">--}}
+                            {{--<li>--}}
+                                {{--<a href="{{route('admin.teachers.all')}}">Show All Teachers</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="{{route('admin.teacher.teacherAddForm')}}">Add New Teacher</a>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
