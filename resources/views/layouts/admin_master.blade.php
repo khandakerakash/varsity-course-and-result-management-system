@@ -84,27 +84,12 @@
                     </li>
                     <li>
                         <a href="{{route('admin.teachers.all')}}"><i class="fa fa-graduation-cap fa-fw"></i> Faculty Members<span class="pull-right fa fa-angle-right"></span></a>
-                        {{--<ul class="nav nav-second-level">--}}
-                            {{--<li>--}}
-                                {{--<a href="{{route('admin.teachers.all')}}">Show All Teachers</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="{{route('admin.teacher.teacherAddForm')}}">Add New Teacher</a>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
-                        <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-book fa-fw"></i> Courses<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Show All Courses</a>
-                            </li>
-                            <li>
-                                <a href="#">Add New Course</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
+                        <a href="{{route('admin.course.all')}}"><i class="fa fa-book fa-fw"></i> Courses<span class="pull-right fa fa-angle-right"></span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.course_assign_teacher.all')}}"><i class="fa fa-book fa-fw"></i> Coursr Assign Teacher<span class="pull-right fa fa-angle-right"></span></a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-users fa-fw"></i> Students<span class="fa arrow"></span></a>

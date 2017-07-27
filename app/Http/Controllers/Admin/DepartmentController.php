@@ -12,10 +12,10 @@ class DepartmentController extends Controller
     /*
     * View all departments data
     */
-    public function departments()
+    public function index()
     {
         $departments = DB::table('departments')->orderBy('created_at', 'desc')->paginate(5);
-        return view('admin.departments.departments', ['departments' => $departments]);
+        return view('admin.departments.index', ['departments' => $departments]);
     }
 
     /*
@@ -57,18 +57,21 @@ class DepartmentController extends Controller
      */
     public function update(Request $request)
     {
+        $this->validate($request, [
+            'code' => 'required|max:7',
+            'name' => 'required|max:100',
+        ]);
 
-        $id = $request->edit_id;
+        $id = $request->id;
         $department = Department::find($id);
 
-        $department->code = $request->edit_code;
-        $department->name = $request->edit_name;
+        $department->code = $request->code;
+        $department->name = $request->name;
 
         $department->save();
 
-
-        return back()
-            ->with('success', 'Department Updated Successfully!');
+        return redirect()->route('admin.departments.all')
+            ->with('success', 'Student Updated Successfully!');
 
     }
 

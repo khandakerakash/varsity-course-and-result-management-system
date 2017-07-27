@@ -12,7 +12,7 @@
             </div>
         @endif
         <div class="table-responsive">
-            <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#addModal">Add new department</button>
+            <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add</button>
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -29,9 +29,9 @@
                         <td>{{$department->code}}</td>
                         <td>{{$department->name}}</td>
                         <td>
-                            <button class="btn btn-info" data-toggle="modal" data-target="#viewModal" onclick="fun_view('{{$department -> id}}')">View</button>
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#editModal" onclick="fun_edit('{{$department -> id}}')">Edit</button>
-                            <button class="btn btn-danger" onclick="fun_delete('{{$department -> id}}')">Delete</button>
+                            <button class="btn btn-info" data-toggle="modal" data-target="#viewModal" onclick="fun_view('{{$department -> id}}')"><i class="fa fa-eye" aria-hidden="true"></i> View</button>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#editModal" onclick="fun_edit('{{$department -> id}}')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+                            <button class="btn btn-danger" onclick="fun_delete('{{$department -> id}}')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -75,11 +75,11 @@
                                     <input type="text" class="form-control" id="name" name="name" required="required">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-default">Add</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </div>
 
@@ -121,6 +121,15 @@
                         <h4 class="modal-title">Edit department</h4>
                     </div>
                     <div class="modal-body">
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form action="{{ url('http://varsity.dev/admin/department/update') }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group">
@@ -134,12 +143,12 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-default">Update</button>
+                            <button type="submit" class="btn btn-primary">Save Change</button>
                             <input type="hidden" id="edit_id" name="id">
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
 
                 </div>

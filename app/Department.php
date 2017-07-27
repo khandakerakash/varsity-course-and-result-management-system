@@ -20,4 +20,10 @@ class Department extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    public function course_assign_teachers()
+    {
+        return $this->hasMany('CourseAssignTeacher');
+    }
+
 }
