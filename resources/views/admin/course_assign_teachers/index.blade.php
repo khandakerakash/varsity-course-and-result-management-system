@@ -45,18 +45,22 @@
 
 @section('mYscript')
     <script>
-        $('#department').on('change', function (e) {
-                //console.log(e);
+        $(document).ready(function(){
 
-            var department_id = e.target.value;
+            $('#department').on('change', function (e) {
+                    //console.log(e);
 
-            //ajax
-            $.get('/ajaxTeacher?department_id=' + department_id, function (data) {
-                //success data
-                $('#teacher').empty();
-                $.each(data, function (index, teacherObj) {
+                var department_id = e.target.value;
 
-                    $('#teacher').append('<option value="'+teacherObj.id+'teacherObj.name'+'"></option>')
+                //ajax
+                $.get('{{'ajaxTeacher'}}/?department_id=' + department_id, function (data) {
+                    //success data
+                    $('#teacher').empty();
+                    $.each(data, function (index, teacherObj) {
+
+                        $('#teacher').append('<option value="'+teacherObj.id+'teacherObj.name'+'"></option>')
+                    });
+
                 });
 
             });
@@ -68,4 +72,5 @@
             $('#success_msg_id').remove();
         }, 1000);
     </script>
+
 @endsection

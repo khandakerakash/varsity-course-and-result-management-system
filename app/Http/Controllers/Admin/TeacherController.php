@@ -47,7 +47,7 @@ class TeacherController extends Controller
 
         $teacher->save();
 
-        return back()
+        return redirect()->route('admin.teachers.all')
             ->with('success', 'Teacher Added Successfully!');
     }
 
@@ -81,6 +81,8 @@ class TeacherController extends Controller
         $id = $request->id;
         $teacher = Teacher::find($id);
 
+        //dd($teacher);
+
         $teacher->name = $request->name;
         $teacher->address = $request->address;
         $teacher->email = $request->email;
@@ -92,7 +94,7 @@ class TeacherController extends Controller
         $teacher->save();
 
 
-        return back()
+        return redirect()->route('admin.teachers.all')
             ->with('success', 'Teacher Updated Successfully!');
     }
 

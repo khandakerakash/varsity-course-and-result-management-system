@@ -45,9 +45,11 @@ class CourseController extends Controller
         $course->department_id = $request->department_id;
         $course->semester_id = $request->semester_id;
 
+        //dd($course);
+
         $course->save();
 
-        return back()
+        return redirect()->route('admin.course.all')
             ->with('success', 'Course Added Successfully!');
     }
 
@@ -70,6 +72,8 @@ class CourseController extends Controller
      */
     public function update(Request $request)
     {
+
+        dd($request->all());
         $this->validate($request, [
             'code' => 'required',
             'name' => 'required',
@@ -81,6 +85,8 @@ class CourseController extends Controller
 
         $id = $request->id;
         $course = Course::find($id);
+
+        //dd($course);
 
         $course->code = $request->code;
         $course->name = $request->name;

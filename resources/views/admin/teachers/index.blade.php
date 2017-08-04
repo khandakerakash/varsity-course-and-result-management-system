@@ -73,7 +73,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add new department</h4>
+                        <h4 class="modal-title">Add new teacher</h4>
                     </div>
                     <div class="modal-body">
                         @if (count($errors) > 0)
@@ -85,58 +85,66 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('http://varsity.dev/admin/teacher/add') }}" method="post">
+                        <form action="{{ url('http://varsity.dev/admin/teacher/add') }}" method="post"
+                              class="department-validate-form">
                             {{ csrf_field() }}
                             <div class="form-group row">
-                                {{Form::label('name', 'Name', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="name" class="control-label col-sm-2">Name:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('name', null, [ 'id' => 'edit_name', 'class' => 'form-control', 'placeholder' => 'Write a teacher name']) }}
+                                    <input type="text" class="form-control" name="name"
+                                           placeholder="Write a teacher name" required="required">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('address', 'Address', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="address" class="control-label col-sm-2">Address:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::textarea('address', null, ['id' => 'edit_address','class' => 'form-control', 'rows' => '3', 'placeholder' => 'Write an address']) }}
+                                    <textarea class="form-control" name="address" rows="3"
+                                              placeholder="Write an address" required="required"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('email', 'Email', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="email" class="control-label col-sm-2">Email:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('email', null, ['id' => 'edit_email','class' => 'form-control', 'placeholder' => 'Write a teacher name']) }}
+                                    <input type="email" class="form-control" name="email" placeholder="Write an email"
+                                           required="required">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('contact_no', 'Contact', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="contact_no" class="control-label col-sm-2">Contact:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('contact_no', null, ['id' => 'edit_contact_no', 'class' => 'form-control', 'placeholder' => 'Write a contact number']) }}
+                                    <input type="text" class="form-control" name="contact_no"
+                                           placeholder="Write a contact number" required="required">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('designation_id', 'Designation', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="designation_id" class="control-label col-sm-2">Designation:</label>
                                 <div class="col-sm-7">
                                     <select class="form-control" name="designation_id">
-                                        <option id="edit_designation_id">Select Designations Title</option>
+                                        <option>Select Designations Title</option>
                                         @foreach($designations as $designation)
-                                            <option value="{{$designation->id}}">{{$designation->title}}</option>
+                                            <option name="designation_id"
+                                                    value="{{$designation->id}}">{{$designation->title}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('department_id', 'Department', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="department_id" class="control-label col-sm-2">Department:</label>
                                 <div class="col-sm-7">
                                     <select class="form-control" name="department_id">
-                                        <option id="edit_department_id">Select Department Name</option>
+                                        <option>Select Department Name</option>
                                         @foreach($departments as $department)
-                                            <option value="{{$department->id}}">{{$department->name}}</option>
+                                            <option name="department_id"
+                                                    value="{{$department->id}}">{{$department->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('credit', 'Credit to be taken', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="credit" class="control-label col-sm-2">Credit to be taken:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('credit', null, ['id' => 'edit_credit','class' => 'form-control', 'placeholder' => 'Write a teacher credit']) }}
+                                    <input type="text" class="form-control" name="credit" placeholder="Write credit"
+                                           required="required">
                                 </div>
                             </div>
 
@@ -145,7 +153,6 @@
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
-                            <input type="hidden" id="edit_id" name="id">
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -202,34 +209,39 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('http://varsity.dev/admin/teacher/update') }}" method="post">
+                        <form action="{{ url('http://varsity.dev/admin/teacher/update') }}" method="post"
+                              class="department-validate-form">
                             {{ csrf_field() }}
                             <div class="form-group row">
-                                {{Form::label('name', 'Name', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="name" class="control-label col-sm-2">Name:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('name', null, [ 'id' => 'edit_name', 'class' => 'form-control', 'placeholder' => 'Write a teacher name']) }}
+                                    <input type="text" class="form-control" id="edit_name" name="name"
+                                           placeholder="Write a teacher name" required="required">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('address', 'Address', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="address" class="control-label col-sm-2">Address:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::textarea('address', null, ['id' => 'edit_address','class' => 'form-control', 'rows' => '3', 'placeholder' => 'Write an address']) }}
+                                    <textarea class="form-control" name="address" id="edit_address" rows="3"
+                                              placeholder="Write an address" required="required"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('email', 'Email', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="email" class="control-label col-sm-2">Email:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('email', null, ['id' => 'edit_email','class' => 'form-control', 'placeholder' => 'Write a teacher name']) }}
+                                    <input type="email" class="form-control" id="edit_email" name="email"
+                                           placeholder="Write an email" required="required">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('contact_no', 'Contact', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="contact_no" class="control-label col-sm-2">Contact:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('contact_no', null, ['id' => 'edit_contact_no', 'class' => 'form-control', 'placeholder' => 'Write a contact number']) }}
+                                    <input type="text" class="form-control" id="edit_contact_no" name="contact_no"
+                                           placeholder="Write a contact number" required="required">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('designation_id', 'Designation', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="designation_id" class="control-label col-sm-2">Designation:</label>
                                 <div class="col-sm-7">
                                     <select class="form-control" name="designation_id">
                                         <option id="edit_designation_id">Select Designations Title</option>
@@ -240,7 +252,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('department_id', 'Department', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="department_id" class="control-label col-sm-2">Department:</label>
                                 <div class="col-sm-7">
                                     <select class="form-control" name="department_id">
                                         <option id="edit_department_id">Select Department Name</option>
@@ -251,9 +263,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('credit', 'Credit to be taken', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="credit" class="control-label col-sm-2">Credit to be taken:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('credit', null, ['id' => 'edit_credit','class' => 'form-control', 'placeholder' => 'Write a teacher credit']) }}
+                                    <input type="text" class="form-control" id="edit_credit" name="credit"
+                                           placeholder="Write credit" required="required">
                                 </div>
                             </div>
 
@@ -290,7 +303,7 @@
                 type: "GET",
                 data: {"id": id},
                 success: function (result) {
-                    console.log(result);
+                    //console.log(result);
                     $("#view_name").text(result.name);
                     $("#view_designation").text(result.designation.title);
                     $("#view_department").text(result.department.name);
@@ -342,6 +355,31 @@
                 return false;
             }
         }
+
+        // validate teacher add form on keyup and submit
+        $(".department-validate-form").validate({
+            rules: {
+                name: "required",
+                address: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                contact_no: "required",
+                designation_id: "required",
+                department_id: "required",
+                credit: "required"
+            },
+            messages: {
+                name: "Please enter teacher name",
+                address: "Please enter an address",
+                email: "Please enter a valid email address",
+                contact_no: "Please enter contact number",
+                designation_id: "Please enter designation title",
+                department_id: "Please enter department name",
+                credit: "Please enter credit",
+            }
+        });
 
 
         /* Add successful message function */

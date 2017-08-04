@@ -12,7 +12,9 @@
             </div>
         @endif
         <div class="table-responsive">
-            <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add</button>
+            <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#addModal">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+            </button>
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -37,10 +39,17 @@
                         <td>{{$course->department->name}}</td>
                         <td>{{$course->semester->title}}</td>
                         <td>
-                            <button class="btn btn-info" data-toggle="modal" data-target="#viewModal" onclick="fun_view('{{$course -> id}}')"><i class="fa fa-eye" aria-hidden="true"></i> View</button>
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#editModal" onclick="fun_edit('{{$course -> id}}')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+                            <button class="btn btn-info" data-toggle="modal" data-target="#viewModal"
+                                    onclick="fun_view('{{$course -> id}}')"><i class="fa fa-eye" aria-hidden="true"></i>
+                                View
+                            </button>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#editModal"
+                                    onclick="fun_edit('{{$course -> id}}')"><i class="fa fa-pencil-square-o"
+                                                                               aria-hidden="true"></i> Edit
+                            </button>
                             <button class="btn btn-danger" onclick="fun_delete('{{$course -> id}}')"><i
-                                        class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                        class="fa fa-trash-o" aria-hidden="true"></i> Delete
+                            </button>
                         </td>
                     </tr>
                 @endforeach
@@ -49,8 +58,10 @@
         </div>
         {{ $courses->links() }}
 
-        <input type="hidden" name="hidden_view" id="hidden_view" value="{{url('http://varsity.dev/admin/course/view')}}">
-        <input type="hidden" name="hidden_delete" id="hidden_delete" value="{{url('http://varsity.dev/admin/course/delete')}}">
+        <input type="hidden" name="hidden_view" id="hidden_view"
+               value="{{url('http://varsity.dev/admin/course/view')}}">
+        <input type="hidden" name="hidden_delete" id="hidden_delete"
+               value="{{url('http://varsity.dev/admin/course/delete')}}">
 
         <!-- Add modal code start -->
         <div class="modal fade" id="addModal" role="dialog">
@@ -72,55 +83,62 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('http://varsity.dev/admin/course/add') }}" method="post">
+                        <form action="{{ url('http://varsity.dev/admin/course/add') }}" method="post"
+                              class="department-validate-form">
                             {{ csrf_field() }}
                             <div class="form-group row">
-                                {{Form::label('code', 'Code', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="code" class="control-label col-sm-2">Code:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('code', null, ['class' => 'form-control', 'placeholder' => 'Write a subject code']) }}
+                                    <input type="text" name="code" class="form-control"
+                                           required="required" placeholder="Write a subject code">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('name', 'Name', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="name" class="control-label col-sm-2">Name:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Write a subject name']) }}
+                                    <input type="text" name="name" class="form-control"
+                                           required="required" placeholder="Write a subject name">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('credit', 'Credit', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="credit" class="control-label col-sm-2">Credit:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('credit', null, ['class' => 'form-control', 'placeholder' => 'Write a subject credit']) }}
+                                    <input type="text" name="credit" class="form-control"
+                                           required="required" placeholder="Write a subject credit">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('description', 'Description', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="description" class="control-label col-sm-2">Description:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::textarea('description', null, ['class' => 'form-control',  'rows' => '3', 'placeholder' => 'Write a subject description']) }}
+                                    <textarea type="text" name="description" class="form-control"
+                                              rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('department_id', 'Department', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="department_id" class="control-label col-sm-2">Department</label>
                                 <div class="col-sm-7">
                                     <select class="form-control" name="department_id">
                                         <option>Select Department Name</option>
                                         @foreach($departments as $department)
-                                            <option value="{{$department->id}}">{{$department->name}}</option>
+                                            <option name="department_id"
+                                                    value="{{$department->id}}">{{$department->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('semester_id', 'Semester', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="semester_id" class="control-label col-sm-2">Semester:</label>
                                 <div class="col-sm-7">
-                                    {{--{{Form::select('designation', ['L' => 'Large', 'S' => 'Small'], null, ['class' => 'form-control', 'placeholder' => 'Select Designation Title'])}}--}}
                                     <select class="form-control" name="semester_id">
                                         <option>Select Designations Title</option>
                                         @foreach($semesters as $semester)
-                                            <option value="{{$semester->id}}">{{$semester->title}}</option>
+                                            <option name="semester_id"
+                                                    value="{{$semester->id}}">{{$semester->title}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <div class="col-sm-offset-2 col-sm-7">
                                     <button type="submit" class="btn btn-primary">Save</button>
@@ -144,7 +162,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">A single teacher profile</h4>
+                        <h4 class="modal-title">A single course details</h4>
                     </div>
                     <div class="modal-body">
                         <p><b>Code: </b><span id="view_code" class="text-success"></span></p>
@@ -182,50 +200,57 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('http://varsity.dev/admin/course/update') }}" method="post">
+                        <form action="{{ url('http://varsity.dev/admin/course/update', $course-> id) }}" method="post"
+                              class="department-validate-form" name="edit_form" id="edit_form">
                             {{ csrf_field() }}
                             <div class="form-group row">
-                                {{Form::label('code', 'Code', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="code" class="control-label col-sm-2">Code:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('code', null, ['id' => 'edit_code', 'class' => 'form-control', 'placeholder' => 'Write a subject code']) }}
+                                    <input type="text" id="edit_code" name="code" class="form-control"
+                                           required="required" placeholder="Write a subject code">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('name', 'Name', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="name" class="control-label col-sm-2">Name:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('name', null, ['id' => 'edit_name', 'class' => 'form-control', 'placeholder' => 'Write a subject name']) }}
+                                    <input type="text" id="edit_name" name="name" class="form-control"
+                                           required="required" placeholder="Write a subject name">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('credit', 'Credit', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="credit" class="control-label col-sm-2">Credit:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::text('credit', null, ['id' => 'edit_credit', 'class' => 'form-control', 'placeholder' => 'Write a subject credit']) }}
+                                    <input type="text" id="edit_credit" name="credit" class="form-control"
+                                           required="required" placeholder="Write a subject credit">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('description', 'Description', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="description" class="control-label col-sm-2">Description:</label>
                                 <div class="col-sm-7">
-                                    {{ Form::textarea('description', null, ['id' => 'edit_description', 'class' => 'form-control',  'rows' => '3', 'placeholder' => 'Write a subject description']) }}
+                                    <textarea type="text" id="edit_description" name="description" class="form-control"
+                                              rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('department_id', 'Department', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="department_id" class="control-label col-sm-2">Department</label>
                                 <div class="col-sm-7">
                                     <select class="form-control" name="department_id">
                                         <option id="edit_department">Select Department Name</option>
                                         @foreach($departments as $department)
-                                            <option value="{{$department->id}}">{{$department->name}}</option>
+                                            <option id="edit_department" name="department_id"
+                                                    value="{{$department->id}}">{{$department->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{Form::label('semester_id', 'Semester', ['class' => 'col-sm-2', 'control-label'])}}
+                                <label for="semester_id" class="control-label col-sm-2">Semester:</label>
                                 <div class="col-sm-7">
                                     <select class="form-control" name="semester_id">
                                         <option id="edit_semester">Select Designations Title</option>
                                         @foreach($semesters as $semester)
-                                            <option value="{{$semester->id}}">{{$semester->title}}</option>
+                                            <option id="edit_semester" name="semester_id"
+                                                    value="{{$semester->id}}">{{$semester->title}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -242,9 +267,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
-
                 </div>
-
             </div>
         </div>
         <!-- Edit code ends -->
@@ -257,14 +280,13 @@
     <script type="text/javascript">
 
         /* Course view function */
-        function fun_view(id)
-        {
+        function fun_view(id) {
             var view_url = $("#hidden_view").val();
             $.ajax({
                 url: view_url,
-                type:"GET",
-                data: {"id":id},
-                success: function(result){
+                type: "GET",
+                data: {"id": id},
+                success: function (result) {
                     //console.log(result);
                     $("#view_code").text(result.code);
                     $("#view_name").text(result.name);
@@ -277,14 +299,13 @@
         }
 
         /* Course edit function */
-        function fun_edit(id)
-        {
+        function fun_edit(id) {
             var view_url = $("#hidden_view").val();
             $.ajax({
                 url: view_url,
-                type:"GET",
-                data: {"id":id},
-                success: function(result){
+                type: "POST",
+                data: $("#edit_form").serialize(),
+                success: function (result) {
                     //console.log(result);
                     $("#edit_code").val(result.code);
                     $("#edit_name").val(result.name);
@@ -297,28 +318,47 @@
         }
 
         /* Course delete function */
-        function fun_delete(id)
-        {
+        function fun_delete(id) {
             var conf = confirm("Are you sure want to delete??");
-            if(conf){
+            if (conf) {
                 var delete_url = $("#hidden_delete").val();
                 $.ajax({
                     url: delete_url,
-                    type:"POST",
-                    data: {"id":id,_token: "{{ csrf_token() }}"},
-                    success: function(response){
+                    type: "POST",
+                    data: {"id": id, _token: "{{ csrf_token() }}"},
+                    success: function (response) {
                         alert(response);
                         location.reload();
                     }
                 });
             }
-            else{
+            else {
                 return false;
             }
         }
 
+        // validate teacher add form on keyup and submit
+        $(".department-validate-form").validate({
+            rules: {
+                code: "required",
+                name: "required",
+                credit: "required",
+                description: "required",
+                department_id: "required",
+                semester_id: "required"
+            },
+            messages: {
+                name: "Please enter subject code",
+                address: "Please enter subject name",
+                email: "Please enter subject credit",
+                contact_no: "Please enter subject description",
+                department_id: "Please enter department name",
+                semester_id: "Please enter semester",
+            }
+        });
+
         /* Add successful message function */
-        setTimeout(function(){
+        setTimeout(function () {
             $('#success_msg_id').remove();
         }, 1000);
 

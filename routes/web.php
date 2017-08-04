@@ -11,6 +11,8 @@
 |
 */
 
+use App\Teacher;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,7 +22,6 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 
 //For admin departments activities
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
@@ -64,6 +65,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
     Route::get('/course_assign_teacher', 'Admin\CourseAssignTeacherController@index')->name('admin.course_assign_teacher.all');
     Route::get('/ajaxTeacher','Admin\CourseAssignTeacherController@ajaxTeacher')->name('admin.course_assign_teacher.ajaxTeacher');
+    Route::get('/ajaxCourseCode/{id}','Admin\CourseAssignTeacherController@ajaxCourseCode')->name('admin.course_assign_teacher.ajaxCourseCode');
+    Route::get('/ajaxCourseName/{id}','Admin\CourseAssignTeacherController@ajaxCourseName')->name('admin.course_assign_teacher.ajaxCourseName');
 
     Route::post('/course_assign_teacher/add', 'Admin\CourseAssignTeacherController@add')->name('admin.course_assign_teacher.add');
 //    Route::get('/course/view', 'Admin\CourseController@view')->name('admin.course.view');

@@ -1,0 +1,5 @@
+form.department-validate-form label.error, label.error {
+    /* remove the next line when you have trouble in IE6 with labels in list */
+    color: #e74c3c;
+    font-style: italic
+}

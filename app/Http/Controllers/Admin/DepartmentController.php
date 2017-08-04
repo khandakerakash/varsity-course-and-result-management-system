@@ -34,7 +34,7 @@ class DepartmentController extends Controller
 
         $department->save();
 
-        return back()
+        return redirect()->route('admin.departments.all')
             ->with('success', 'Department Added Successfully!');
     }
 
@@ -71,7 +71,7 @@ class DepartmentController extends Controller
         $department->save();
 
         return redirect()->route('admin.departments.all')
-            ->with('success', 'Student Updated Successfully!');
+            ->with('success', 'Department Updated Successfully!');
 
     }
 

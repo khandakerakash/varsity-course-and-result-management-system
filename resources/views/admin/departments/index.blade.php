@@ -63,16 +63,16 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('http://varsity.dev/admin/department/add') }}" method="post">
+                        <form action="{{ url('http://varsity.dev/admin/department/add') }}" method="post" class="department-validate-form">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="code">Code:</label>
-                                    <input type="text" class="form-control" id="code" name="code" required="required">
+                                    <input type="text" class="form-control" id="code" name="code" required="required" placeholder="Write department code">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name:</label>
-                                    <input type="text" class="form-control" id="name" name="name" required="required">
+                                    <input type="text" class="form-control" id="name" name="name" required="required" placeholder="Write department name">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Add</button>
@@ -130,7 +130,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('http://varsity.dev/admin/department/update') }}" method="post">
+                        <form action="{{ url('http://varsity.dev/admin/department/update') }}" method="post" class="department-validate-form">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <div class="form-group">
@@ -173,7 +173,7 @@
                 type:"GET",
                 data: {"id":id},
                 success: function(result){
-                    console.log(result);
+                    //console.log(result);
                     $("#view_code").text(result.code);
                     $("#view_name").text(result.name);
                 }
@@ -217,6 +217,19 @@
                 return false;
             }
         }
+
+        // validate departmetn add form on keyup and submit
+        $(".department-validate-form").validate({
+            rules: {
+                code: "required",
+                name: "required"
+            },
+            messages: {
+                code: "Please enter department code",
+                name: "Please enter department name"
+            }
+        });
+
 
 
         /* Department Add successful message function */
