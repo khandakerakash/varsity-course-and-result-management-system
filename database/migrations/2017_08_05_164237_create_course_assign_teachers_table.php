@@ -20,14 +20,15 @@ class CreateCourseAssignTeachersTable extends Migration
             $table->float('credit_taken', 2, 1);
             $table->float('remaining_credit', 2, 1);
             $table->integer('course_id')->unsigned();
-            $table->string('code');
-            $table->string('name');
+            $table->string('course_name');
+            $table->string('course_credit');
 
             $table->timestamps();
 
             $table->foreign('department_id')->references('id')->on('departments');
             $table->foreign('teacher_id')->references('id')->on('teachers');
             $table->foreign('course_id')->references('id')->on('courses');
+
         });
     }
 

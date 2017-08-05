@@ -72,8 +72,6 @@ class CourseController extends Controller
      */
     public function update(Request $request)
     {
-
-        dd($request->all());
         $this->validate($request, [
             'code' => 'required',
             'name' => 'required',

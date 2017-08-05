@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 //        DB::statement('SET FOREIGN_KEY_CHECKS=0');
 //
 //        $table = [
-//            'users', 'departments', 'semesters', 'courses', 'designations', 'teachers'
+//            'users', 'departments', 'semesters', 'courses', 'designations', 'teachers', 'course_assign_teachers',
 //        ];
 //
 //        foreach ($table as $item){

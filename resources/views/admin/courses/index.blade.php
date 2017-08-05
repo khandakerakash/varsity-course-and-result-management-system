@@ -200,8 +200,8 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('http://varsity.dev/admin/course/update', $course-> id) }}" method="post"
-                              class="department-validate-form" name="edit_form" id="edit_form">
+                        <form action="{{ url('http://varsity.dev/admin/course/update') }}" method="post"
+                              class="department-validate-form">
                             {{ csrf_field() }}
                             <div class="form-group row">
                                 <label for="code" class="control-label col-sm-2">Code:</label>
@@ -303,8 +303,8 @@
             var view_url = $("#hidden_view").val();
             $.ajax({
                 url: view_url,
-                type: "POST",
-                data: $("#edit_form").serialize(),
+                type: "GET",
+                data: {"id": id},
                 success: function (result) {
                     //console.log(result);
                     $("#edit_code").val(result.code);

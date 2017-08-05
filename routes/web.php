@@ -64,8 +64,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
     Route::get('/course_assign_teacher', 'Admin\CourseAssignTeacherController@index')->name('admin.course_assign_teacher.all');
-    Route::get('/ajaxTeacher','Admin\CourseAssignTeacherController@ajaxTeacher')->name('admin.course_assign_teacher.ajaxTeacher');
-    Route::get('/ajaxCourseCode/{id}','Admin\CourseAssignTeacherController@ajaxCourseCode')->name('admin.course_assign_teacher.ajaxCourseCode');
+    Route::get('/ajaxTeacherCourse','Admin\CourseAssignTeacherController@ajaxTeacherCourse')->name('admin.course_assign_teacher.ajaxTeacherCourse');
+    Route::get('/ajaxTeacherCredit/{id}','Admin\CourseAssignTeacherController@ajaxTeacherCredit')->name('admin.course_assign_teacher.ajaxTeacherCredit');
+    Route::get('/ajaxTeacherRemainingCredit/{id}','Admin\CourseAssignTeacherController@ajaxTeacherRemainingCredit')->name('admin.course_assign_teacher.ajaxTeacherRemainingCredit');
     Route::get('/ajaxCourseName/{id}','Admin\CourseAssignTeacherController@ajaxCourseName')->name('admin.course_assign_teacher.ajaxCourseName');
 
     Route::post('/course_assign_teacher/add', 'Admin\CourseAssignTeacherController@add')->name('admin.course_assign_teacher.add');
