@@ -9,6 +9,7 @@ use App\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class CourseAssignTeacherController extends Controller
@@ -24,23 +25,31 @@ class CourseAssignTeacherController extends Controller
     public function ajaxTeacherCourse()
     {
         $department_id = Input::get('department_id');
-
         $teachers = Teacher::where('department_id', '=', $department_id)->get();
         $courses = Course::where('department_id', '=', $department_id)->get();
-
         $data = ["teacher"=>$teachers,"course"=>$courses];
+
         return $data;
     }
 
     // For Teacher wise teacher credit information
     public function ajaxTeacherCredit($id)
     {
-        $teacher = Teacher::find($id);
+        $users = DB::table('teachers')
+            ->leftJoin('course_assign_teachers', 'teachers.id', '=', 'course_assign_teachers.teacher_id')
+            ->leftJoin('courses', 'courses.id', '=', 'course_assign_teachers.course_id')
+            ->where('teachers.id',$id)
+            ->select(DB::raw('IFNULL(sum(courses.credit),0),teachers.id,teachers.credit'))
+            ->groupBy('teachers.id')
+            ->get();
 
-        if(count($teacher)>0){
 
-            return $teacher;
-        }
+        dd($users);
+
+//        if(count($teacher)>0){
+//
+//            return $teacher;
+//        }
 
         return ["error"=>true,"msg"=>"No credit appointed for this teacher!"];
     }
@@ -50,20 +59,27 @@ class CourseAssignTeacherController extends Controller
     {
         $teacher = Teacher::find($id);
 
-        $remaining_credit = CourseAssignTeacher::find('remaining_credit');
+        $taken_credit = $teacher->credit;
 
-        if ($remaining_credit == null){
+        $remaining_credit_info = CourseAssignTeacher::find($id);
 
-            $remaining_credit_info = $teacher->credit;
-            return ["msg"=>$remaining_credit_info];
+        foreach ($remaining_credit_info as $item){
 
-        }else {
+            $left_credit = $item->remaining_credit;
 
-            $remaining_credit_info = $teacher->credit;
+            if ($left_credit == 0) {
 
-            $left_credit_info = $remaining_credit_info - $remaining_credit;
+                $rcredit = $taken_credit;
 
-            return ["msg"=>$left_credit_info];
+                return ["msg"=>$rcredit];
+            }
+
+            else {
+
+                $rcredit = $taken_credit - $left_credit;
+
+                return ["msg"=>$rcredit];
+            }
         }
     }
 
@@ -80,8 +96,8 @@ class CourseAssignTeacherController extends Controller
             'department_id' => 'required',
             'teacher_id' => 'required',
             'credit_taken' => 'required',
-            'remaining_credit' => 'required',
-            'course_id' => 'required',
+//            'remaining_credit' => 'required',
+            'course_id' => 'required|unique:course_assign_teachers,teacher_id',
             'course_name' => 'required',
             'course_credit' => 'required',
         ]);

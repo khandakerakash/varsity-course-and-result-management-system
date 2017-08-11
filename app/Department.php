@@ -26,4 +26,9 @@ class Department extends Model
         return $this->hasMany('CourseAssignTeacher');
     }
 
+    public function register_students()
+    {
+        return $this->hasMany('RegisterStudent');
+    }
+
 }

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/metisMenu.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.css')}}">
     <link rel="stylesheet" href="{{asset('css/master.css')}}">
     @yield('css')
@@ -90,7 +89,13 @@
                         <a href="{{route('admin.course.all')}}"><i class="fa fa-book fa-fw"></i> Courses<span class="pull-right fa fa-angle-right"></span></a>
                     </li>
                     <li>
-                        <a href="{{route('admin.course_assign_teacher.all')}}"><i class="fa fa-book fa-fw"></i> Coursr Assign Teacher<span class="pull-right fa fa-angle-right"></span></a>
+                        <a href="{{route('admin.course_assign_teacher.all')}}"><i class="fa fa-plus-circle"></i> Coursr Assign Teacher<span class="pull-right fa fa-angle-right"></span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.course_statics.all')}}"><i class="fa fa-eye"></i> View Course Statics<span class="pull-right fa fa-angle-right"></span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.register_students.all')}}"><i class="fa fa-registered"></i> Register Students<span class="pull-right fa fa-angle-right"></span></a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-users fa-fw"></i> Students<span class="fa arrow"></span></a>
@@ -125,8 +130,8 @@
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/metisMenu.min.js')}}"></script>
-<script src="{{asset('js/wow.min.js')}}"></script>
 <script src="{{asset('js/sb-admin-2.js')}}"></script>
+<script src="{{asset('js/wow.min.js')}}"></script>
 <script src="{{asset('js/jquery.validate.js')}}"></script>
 
 @yield('myScript')

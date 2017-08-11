@@ -75,3 +75,21 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 //    Route::post('/course/delete', 'Admin\CourseController@delete')->name('admin.course.delete');
 
 });
+
+//For admin view courses statics
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+
+    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
+    Route::get('/course_statics', 'Admin\ViewCourseStatics@index')->name('admin.course_statics.all');
+    Route::get('/ajaxDepartmentCourseStatics','Admin\ViewCourseStatics@ajaxDepartmentCourseStatics')->name('admin.course_statics.ajaxDepartmentCourseStatics');
+
+});
+
+
+//For admin register students activities
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+
+    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
+    Route::get('/register_students', 'Admin\RegisterStudentController@index')->name('admin.register_students.all');
+    Route::post('/register_students/add', 'Admin\RegisterStudentController@add')->name('admin.register_students.add');
+});

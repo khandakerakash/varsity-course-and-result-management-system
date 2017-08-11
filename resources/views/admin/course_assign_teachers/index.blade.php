@@ -11,9 +11,17 @@
                 <strong>{{ $message }}</strong>
             </div>
         @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="coursr_assign_teacher">
-            <form class="form-horizontal" action="{{ url('http://varsity.dev/admin/course_assign_teacher/add') }}"
-                  method="post">
+            <form class="form-horizontal validate-form" action="{{route('admin.course_assign_teacher.add')}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="department" class="col-sm-2 control-label">Department:</label>
@@ -29,7 +37,7 @@
                 <div class="form-group">
                     <label for="teacher_id" class="col-sm-2 control-label ">Teacher:</label>
                     <div class="col-sm-7">
-                        <select class="form-control" name="teacher_id" id="teacher_id" disabled>
+                        <select class="form-control" name="teacher_id" id="teacher_id" disabled="disabled">
                             <option value="">Select Teacher Name</option>
                         </select>
                     </div>
@@ -37,34 +45,34 @@
                 <div class="form-group">
                     <label for="credit" class="col-sm-2 control-label ">Credit to be taken:</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" name="credit_taken" id="teacher_credit" disabled>
+                        <input type="text" class="form-control" name="credit_taken" id="teacher_credit" disabled="disabled">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="credit" class="col-sm-2 control-label ">Remaining Credit:</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="remaining_credit"
-                               id="teacher_remaining_credit" disabled>
+                               id="teacher_remaining_credit" disabled="disabled">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="courses_id" class="col-sm-2 control-label ">Course Code:</label>
                     <div class="col-sm-7">
-                        <select class="form-control" name="course_id" id="courses_id" disabled>
+                        <select class="form-control" name="course_id" id="courses_id" disabled="disabled">
                             <option value="">Select Course Code</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="courses_id" class="col-sm-2 control-label ">Course Name:</label>
+                    <label for="courses_id" class="col-sm-2 control-label ">Name:</label>
                     <div class="col-sm-7">
-                        <input class="form-control" name="course_name" id="course_name" disabled>
+                        <input class="form-control" name="course_name" id="course_name" disabled="disabled">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="courses_id" class="col-sm-2 control-label ">Course Credit:</label>
+                    <label for="courses_id" class="col-sm-2 control-label ">Credit:</label>
                     <div class="col-sm-7">
-                        <input class="form-control" name="course_credit" id="course_credit" disabled>
+                        <input class="form-control" name="course_credit" id="course_credit" disabled="disabled">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -116,6 +124,8 @@
 
             var teacher_id = e.target.value;
 
+            $('#teacher_credit').removeAttr('disabled');
+
             $.ajax({
                 type: "GET",
                 url: '/admin/ajaxTeacherCredit/' + teacher_id,
@@ -142,6 +152,8 @@
 
             var teacher_id = e.target.value;
 
+            $('#teacher_remaining_credit').removeAttr('disabled');
+
             $.ajax({
                 type: "GET",
                 url: '/admin/ajaxTeacherRemainingCredit/' + teacher_id,
@@ -161,6 +173,9 @@
 
             var course_id = e.target.value;
 
+            $('#course_name').removeAttr('disabled');
+            $('#course_credit').removeAttr('disabled');
+
             $.ajax({
                 type: "GET",
                 url: '/admin/ajaxCourseName/' + course_id,
@@ -175,6 +190,28 @@
             });
 
 
+        });
+
+        // validate course assign to teacher add form on keyup and submit
+        $(".validate-form").validate({
+            rules: {
+                department_id: "required",
+                teacher_id: "required",
+                credit_taken: "required",
+                remaining_credit: "required",
+                course_id: "required",
+                course_name: "required",
+                course_credit: "required"
+            },
+            messages: {
+                department_id: "Please select department",
+                teacher_id: "Please select teacher name",
+                credit_taken: "Credit must be required",
+                remaining_credit: "Credit must be required",
+                course_id: "Please select course code",
+                course_name: "Course name must be required",
+                course_credit: "Course credit must be required"
+            }
         });
 
         /* Add successful message function */

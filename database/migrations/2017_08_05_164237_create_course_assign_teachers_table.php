@@ -17,8 +17,8 @@ class CreateCourseAssignTeachersTable extends Migration
             $table->increments('id');
             $table->integer('department_id')->unsigned();
             $table->integer('teacher_id')->unsigned();
-            $table->float('credit_taken', 2, 1);
-            $table->float('remaining_credit', 2, 1);
+            $table->float('credit_taken', 5, 1);
+            $table->float('remaining_credit', 5, 1);
             $table->integer('course_id')->unsigned();
             $table->string('course_name');
             $table->string('course_credit');
