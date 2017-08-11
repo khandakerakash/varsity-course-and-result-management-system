@@ -45,14 +45,14 @@
                 <div class="form-group">
                     <label for="credit" class="col-sm-2 control-label ">Credit to be taken:</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" name="credit_taken" id="teacher_credit" disabled="disabled">
+                        <input type="text" class="form-control" name="credit_taken" id="teacher_credit" readonly="readonly" disabled="disabled">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="credit" class="col-sm-2 control-label ">Remaining Credit:</label>
                     <div class="col-sm-7">
                         <input type="text" class="form-control" name="remaining_credit"
-                               id="teacher_remaining_credit" disabled="disabled">
+                               id="teacher_remaining_credit" readonly="readonly" disabled="disabled">
                     </div>
                 </div>
                 <div class="form-group">
@@ -66,13 +66,13 @@
                 <div class="form-group">
                     <label for="courses_id" class="col-sm-2 control-label ">Name:</label>
                     <div class="col-sm-7">
-                        <input class="form-control" name="course_name" id="course_name" disabled="disabled">
+                        <input class="form-control" name="course_name" id="course_name" readonly="readonly" disabled="disabled">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="courses_id" class="col-sm-2 control-label ">Credit:</label>
                     <div class="col-sm-7">
-                        <input class="form-control" name="course_credit" id="course_credit" disabled="disabled">
+                        <input class="form-control" name="course_credit" id="course_credit" readonly="readonly" disabled="disabled">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -125,50 +125,25 @@
             var teacher_id = e.target.value;
 
             $('#teacher_credit').removeAttr('disabled');
-
-            $.ajax({
-                type: "GET",
-                url: '/admin/ajaxTeacherCredit/' + teacher_id,
-                success: function (data) {
-
-                    if(data.hasOwnProperty("error")){
-
-                        $('#teacher_credit').val(data.msg);
-
-                    }else{
-
-                        $('#teacher_credit').val(data.credit);
-                    }
-
-                },
-                error: function (data) {
-                    // console.log('Error:', data);
-                }
-            });
-        });
-
-        /* Teacher wise remaining credit */
-        $('#teacher_id').on('change', function (e) {
-
-            var teacher_id = e.target.value;
-
             $('#teacher_remaining_credit').removeAttr('disabled');
 
             $.ajax({
                 type: "GET",
-                url: '/admin/ajaxTeacherRemainingCredit/' + teacher_id,
-                success: function (data) {
+                url: '/admin/ajaxTeacherCredit/' + teacher_id,
+                success: function (credit_data) {
 
-                    $('#teacher_remaining_credit').val(data.msg);
+                    $('#teacher_credit').val(credit_data.teacher_actual_credit);
+
+                    $('#teacher_remaining_credit').val(credit_data.remaining_credit_result);
+
                 },
-                error: function (data) {
+                error: function ($credit_data) {
                     // console.log('Error:', data);
                 }
             });
         });
 
-
-
+        /* Course wise course name and credit */
         $('#courses_id').on('change', function (e) {
 
             var course_id = e.target.value;

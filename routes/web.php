@@ -66,22 +66,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('/course_assign_teacher', 'Admin\CourseAssignTeacherController@index')->name('admin.course_assign_teacher.all');
     Route::get('/ajaxTeacherCourse','Admin\CourseAssignTeacherController@ajaxTeacherCourse')->name('admin.course_assign_teacher.ajaxTeacherCourse');
     Route::get('/ajaxTeacherCredit/{id}','Admin\CourseAssignTeacherController@ajaxTeacherCredit')->name('admin.course_assign_teacher.ajaxTeacherCredit');
-    Route::get('/ajaxTeacherRemainingCredit/{id}','Admin\CourseAssignTeacherController@ajaxTeacherRemainingCredit')->name('admin.course_assign_teacher.ajaxTeacherRemainingCredit');
     Route::get('/ajaxCourseName/{id}','Admin\CourseAssignTeacherController@ajaxCourseName')->name('admin.course_assign_teacher.ajaxCourseName');
-
     Route::post('/course_assign_teacher/add', 'Admin\CourseAssignTeacherController@add')->name('admin.course_assign_teacher.add');
-//    Route::get('/course/view', 'Admin\CourseController@view')->name('admin.course.view');
-//    Route::post('/course/update', 'Admin\CourseController@update')->name('admin.course.update');
-//    Route::post('/course/delete', 'Admin\CourseController@delete')->name('admin.course.delete');
 
 });
 
-//For admin view courses statics
+//For admin view course statics
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
     Route::get('/course_statics', 'Admin\ViewCourseStatics@index')->name('admin.course_statics.all');
-    Route::get('/ajaxDepartmentCourseStatics','Admin\ViewCourseStatics@ajaxDepartmentCourseStatics')->name('admin.course_statics.ajaxDepartmentCourseStatics');
+    Route::get('/ajaxDepartmentCourseStatics/{id}','Admin\ViewCourseStatics@ajaxDepartmentCourseStatics')->name('admin.course_statics.ajaxDepartmentCourseStatics');
 
 });
 

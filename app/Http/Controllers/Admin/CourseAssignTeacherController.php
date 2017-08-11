@@ -25,63 +25,41 @@ class CourseAssignTeacherController extends Controller
     public function ajaxTeacherCourse()
     {
         $department_id = Input::get('department_id');
+
         $teachers = Teacher::where('department_id', '=', $department_id)->get();
         $courses = Course::where('department_id', '=', $department_id)->get();
-        $data = ["teacher"=>$teachers,"course"=>$courses];
 
-        return $data;
+        return $data = ["teacher"=>$teachers,"course"=>$courses];
     }
 
     // For Teacher wise teacher credit information
     public function ajaxTeacherCredit($id)
     {
-        $users = DB::table('teachers')
+        $teachers_credit = DB::table('teachers')
             ->leftJoin('course_assign_teachers', 'teachers.id', '=', 'course_assign_teachers.teacher_id')
             ->leftJoin('courses', 'courses.id', '=', 'course_assign_teachers.course_id')
             ->where('teachers.id',$id)
-            ->select(DB::raw('IFNULL(sum(courses.credit),0),teachers.id,teachers.credit'))
+            ->select(DB::raw('IFNULL(sum(courses.credit),0) as creditEmptyOrNot,teachers.id,teachers.credit'))
             ->groupBy('teachers.id')
-            ->get();
+            ->first();
 
+        $has_credit_or_not = $teachers_credit->creditEmptyOrNot;
+        $teacher_actual_credit = $teachers_credit->credit;
 
-        dd($users);
+        if (!empty($has_credit_or_not)){
 
-//        if(count($teacher)>0){
-//
-//            return $teacher;
-//        }
+            $remaining_credit_result = $teacher_actual_credit - $has_credit_or_not;
 
-        return ["error"=>true,"msg"=>"No credit appointed for this teacher!"];
-    }
+        }else {
 
-    // For Teacher wise teacher remaining credit information
-    public function ajaxTeacherRemainingCredit($id)
-    {
-        $teacher = Teacher::find($id);
-
-        $taken_credit = $teacher->credit;
-
-        $remaining_credit_info = CourseAssignTeacher::find($id);
-
-        foreach ($remaining_credit_info as $item){
-
-            $left_credit = $item->remaining_credit;
-
-            if ($left_credit == 0) {
-
-                $rcredit = $taken_credit;
-
-                return ["msg"=>$rcredit];
-            }
-
-            else {
-
-                $rcredit = $taken_credit - $left_credit;
-
-                return ["msg"=>$rcredit];
-            }
+            $remaining_credit_result = $teacher_actual_credit;
         }
+
+        return $credit_data = ['teacher_actual_credit'=>$teacher_actual_credit, 'remaining_credit_result'=>$remaining_credit_result];
+
+//        dd($credit_data);
     }
+
 
     // For Course wise course name and credit
     public function ajaxCourseName($id)
@@ -95,24 +73,14 @@ class CourseAssignTeacherController extends Controller
         $this->validate($request, [
             'department_id' => 'required',
             'teacher_id' => 'required',
-            'credit_taken' => 'required',
-//            'remaining_credit' => 'required',
-            'course_id' => 'required|unique:course_assign_teachers,teacher_id',
-            'course_name' => 'required',
-            'course_credit' => 'required',
+            'course_id' => 'required|unique:course_assign_teachers,course_id',
         ]);
 
         $course_assign_teacher = new CourseAssignTeacher();
 
         $course_assign_teacher->department_id = $request->department_id;
         $course_assign_teacher->teacher_id = $request->teacher_id;
-        $course_assign_teacher->credit_taken = $request->credit_taken;
-        $course_assign_teacher->remaining_credit = $request->remaining_credit;
         $course_assign_teacher->course_id = $request->course_id;
-        $course_assign_teacher->course_name = $request->course_name;
-        $course_assign_teacher->course_credit = $request->course_credit;
-
-        //dd($course_assign_teacher);
 
         $course_assign_teacher->save();
 
