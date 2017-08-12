@@ -19,4 +19,9 @@ class CourseAssignTeacher extends Model
     {
         return $this->belongsTo('Course');
     }
+
+    public function teacher()
+    {
+        return $this->belongsTo('Teacher');
+    }
 }

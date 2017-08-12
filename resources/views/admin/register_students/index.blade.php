@@ -44,7 +44,13 @@
                 <div class="form-group">
                     <label for="student_reg_date" class="col-sm-2 control-label ">Date:</label>
                     <div class="col-sm-7">
-                        <input type="date" class="form-control" name="student_reg_date" id="student_reg_date">
+                        {{--<input type="date" class="form-control" name="student_reg_date" id="student_reg_date">--}}
+                        <div class='input-group date'  id='student_datetimepicker'>
+                            <input type='text' class="form-control" name="student_reg_date" id="student_reg_date">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -75,5 +81,11 @@
 @endsection
 
 @section('myScript')
-
+    <script type="text/javascript">
+        $(function () {
+            $('#student_datetimepicker').datetimepicker({
+                viewMode: 'years'
+            });
+        });
+    </script>
 @endsection

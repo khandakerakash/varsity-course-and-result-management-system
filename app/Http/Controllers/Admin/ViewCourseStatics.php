@@ -33,21 +33,24 @@ class ViewCourseStatics extends Controller
 //                ->select('courses.*', 'course_assign_teachers.teacher_id', 'semesters.title')
 //                ->get();
 
-//        $course_status = DB::table('departments')
-//            ->leftjoin('departments', 'departments.id', '=', 'courses.department_id')
-//            ->leftjoin('course_assign_teachers', 'course_assign_teachers.department_id', '=', 'courses.department_id')
-//            ->leftjoin('teachers', 'teachers.department_id', '=', 'courses.department_id')
-//            ->leftjoin('semesters', 'courses.semester_id', '=', 'semesters.id')
-//            ->where('departments.id',$id)
-//            ->select('courses.*', 'course_assign_teachers.teacher_id', 'teachers.name', 'semesters.title')
-////            ->groupBy('departments.id')
-//            ->get();
+        $course_status = DB::table('departments')
+            ->leftjoin('courses', 'departments.id', '=', 'courses.department_id')
+//            ->leftjoin('course_assign_teachers', 'courses.department_id', '=', 'course_assign_teachers.department_id')
+//            ->leftJoin('courses', 'courses.id', '=', 'course_assign_teachers.course_id')
+            ->rightjoin('teachers', 'departments.id', '=', 'teachers.department_id')
+//            ->pluck('teachers')
+//            ->values()
+            ->leftjoin('semesters', 'courses.semester_id', '=', 'semesters.id')
+            ->where('departments.id',$id)
+            ->select('courses.*', 'departments.code', 'semesters.title', 'teachers.name')
+//            ->groupBy('departments.id')
+            ->first();
 
+        dd($course_status);
 
 //        $course_status_info = $course_status->where('department_id', '=', $department_id)->get();
 
 //        dd($course_status_info);
-//        dd($course_status);
 
 //        return $course_status;
 //        return $courses;
