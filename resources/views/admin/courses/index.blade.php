@@ -39,17 +39,9 @@
                         <td>{{$course->department->name}}</td>
                         <td>{{$course->semester->title}}</td>
                         <td>
-                            <button class="btn btn-info" data-toggle="modal" data-target="#viewModal"
-                                    onclick="fun_view('{{$course -> id}}')"><i class="fa fa-eye" aria-hidden="true"></i>
-                                View
-                            </button>
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#editModal"
-                                    onclick="fun_edit('{{$course -> id}}')"><i class="fa fa-pencil-square-o"
-                                                                               aria-hidden="true"></i> Edit
-                            </button>
-                            <button class="btn btn-danger" onclick="fun_delete('{{$course -> id}}')"><i
-                                        class="fa fa-trash-o" aria-hidden="true"></i> Delete
-                            </button>
+                            <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#viewModal" onclick="fun_view('{{$course -> id}}')"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editModal" onclick="fun_edit('{{$course -> id}}')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                            <button class="btn btn-sm btn-danger" onclick="fun_delete('{{$course -> id}}')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                         </td>
                     </tr>
                 @endforeach

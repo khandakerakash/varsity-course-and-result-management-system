@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RegisterStudent extends Model
+class RegisteredStudent extends Model
 {
     public function department()
     {
-        return $this->belongsTo('Department');
+        return $this->belongsTo(Department::class);
     }
 }

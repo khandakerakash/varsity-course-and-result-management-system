@@ -23,12 +23,12 @@ class Department extends Model
 
     public function course_assign_teachers()
     {
-        return $this->hasMany('CourseAssignTeacher');
+        return $this->hasMany(CourseAssignTeacher::class);
     }
 
     public function register_students()
     {
-        return $this->hasMany('RegisterStudent');
+        return $this->hasMany(RegisteredStudent::class);
     }
 
 }

@@ -87,4 +87,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
     Route::get('/register_students', 'Admin\RegisterStudentController@index')->name('admin.register_students.all');
     Route::post('/register_students/add', 'Admin\RegisterStudentController@add')->name('admin.register_students.add');
+    Route::get('/register_students/view', 'Admin\RegisterStudentController@view')->name('admin.register_students.view');
+    Route::post('/register_students/update', 'Admin\RegisterStudentController@update')->name('admin.register_students.update');
+    Route::post('/register_students/delete', 'Admin\RegisterStudentController@delete')->name('admin.register_students.delete');
+
 });
