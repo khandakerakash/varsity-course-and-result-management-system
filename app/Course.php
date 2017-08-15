@@ -23,6 +23,11 @@ class Course extends Model
 
     public function course_assign_teachers()
     {
-        return $this->hasMany('CourseAssignTeacher');
+        return $this->hasMany(CourseAssignTeacher::class);
+    }
+
+    public function allocate_class_rooms()
+    {
+        return $this->belongsToMany(AllocateClassRoom::class);
     }
 }

@@ -99,7 +99,10 @@
                         <a href="{{route('admin.register_students.all')}}"><i class="fa fa-registered"></i> Register Students<span class="pull-right fa fa-angle-right"></span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-users fa-fw"></i> Students<span class="fa arrow"></span></a>
+                        <a href="{{route('admin.allocate_class_rooms.all')}}"><i class="fa fa-plus-circle"></i> Allocate Class Rooms<span class="pull-right fa fa-angle-right"></span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-users fa-fw"></i> Students <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="#">Show All Students</a>

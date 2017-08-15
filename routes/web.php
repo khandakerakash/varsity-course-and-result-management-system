@@ -92,3 +92,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::post('/register_students/delete', 'Admin\RegisterStudentController@delete')->name('admin.register_students.delete');
 
 });
+
+//For admin allocate class room
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+
+    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
+    Route::get('/allocate_class_rooms', 'Admin\AllocateClassRoomController@index')->name('admin.allocate_class_rooms.all');
+    Route::post('/allocate_class_rooms/add', 'Admin\AllocateClassRoomController@add')->name('admin.allocate_class_rooms.add');
+
+});

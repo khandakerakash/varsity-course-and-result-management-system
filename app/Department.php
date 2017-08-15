@@ -31,4 +31,9 @@ class Department extends Model
         return $this->hasMany(RegisteredStudent::class);
     }
 
+    public function allocate_class_rooms()
+    {
+        return $this->belongsToMany(AllocateClassRoom::class);
+    }
+
 }

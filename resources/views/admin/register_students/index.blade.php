@@ -322,6 +322,29 @@
             }
         }
 
+        // validate allocate class rooms add form on keyup and submit
+        $(".validate-form").validate({
+            rules: {
+                student_name: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                student_contact_no: "required",
+                student_reg_date: "required",
+                student_address: "required",
+                department_id: "required"
+            },
+            messages: {
+                student_name: "Please write student name",
+                student_email: "Please write a valid email address",
+                student_contact_no: "Please write contact no.",
+                student_reg_date: "Please select a date",
+                student_address: "Please write an address",
+                department_id: "Please select department"
+            }
+        });
+
 
         /* Date picker */
         $(function () {
