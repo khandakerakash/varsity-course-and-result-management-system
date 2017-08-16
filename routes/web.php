@@ -101,3 +101,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::post('/allocate_class_rooms/add', 'Admin\AllocateClassRoomController@add')->name('admin.allocate_class_rooms.add');
 
 });
+
+//For admin view class schedule allocation room info
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+
+    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
+    Route::get('/class_schedule_allocation_rooms', 'Admin\ViewClassScheduleInfoController@index')->name('admin.class_schedule_allocation_rooms.all');
+    Route::get('/ajaxDepartmentClassSchedule/{id}','Admin\ViewClassScheduleInfoController@ajaxDepartmentClassSchedule')->name('admin.class_schedule_allocation_rooms.ajaxDepartmentClassSchedule');
+
+});

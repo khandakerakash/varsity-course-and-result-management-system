@@ -102,6 +102,9 @@
                         <a href="{{route('admin.allocate_class_rooms.all')}}"><i class="fa fa-plus-circle"></i> Allocate Class Rooms<span class="pull-right fa fa-angle-right"></span></a>
                     </li>
                     <li>
+                        <a href="{{route('admin.class_schedule_allocation_rooms.all')}}"><i class="fa fa-eye"></i> View Class Schedule Allocation Room Informations<span class="pull-right fa fa-angle-right"></span></a>
+                    </li>
+                    <li>
                         <a href="#"><i class="fa fa-users fa-fw"></i> Students <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>

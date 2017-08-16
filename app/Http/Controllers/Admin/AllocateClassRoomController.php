@@ -9,6 +9,7 @@ use App\Department;
 use App\RoomNo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class AllocateClassRoomController extends Controller
 {
@@ -20,7 +21,7 @@ class AllocateClassRoomController extends Controller
 
         $rooms = RoomNo::all('id', 'room_code');
 
-        $days = Day::all('id', 'title');
+        $days = DB::table('days')->orderBy('id')->get();
 
         return view('admin.allocate_class_rooms.index', compact(['departments', $departments, 'courses', $courses, 'rooms', $rooms, 'days', $days]));
     }
