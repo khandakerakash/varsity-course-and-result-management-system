@@ -40,8 +40,8 @@
         </div>
         {{ $departments->links() }}
 
-        <input type="hidden" name="hidden_view" id="hidden_view" value="{{url('http://varsity.dev/admin/department/view')}}">
-        <input type="hidden" name="hidden_delete" id="hidden_delete" value="{{url('http://varsity.dev/admin/department/delete')}}">
+        <input type="hidden" name="hidden_view" id="hidden_view" value="{{url('http://vcrms.test/admin/department/view')}}">
+        <input type="hidden" name="hidden_delete" id="hidden_delete" value="{{url('http://vcrms.test/admin/department/delete')}}">
 
         <!-- Add modal code start -->
         <div class="modal fade" id="addModal" role="dialog">
@@ -63,7 +63,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('http://varsity.dev/admin/department/add') }}" method="post" class="department-validate-form">
+                        <form action="{{ url('http://vcrms.test/admin/department/add') }}" method="post" class="department-validate-form">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <div class="form-group">
@@ -130,7 +130,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ url('http://varsity.dev/admin/department/update') }}" method="post" class="department-validate-form">
+                        <form action="{{ url('http://vcrms.test/admin/department/update') }}" method="post" class="department-validate-form">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <div class="form-group">
